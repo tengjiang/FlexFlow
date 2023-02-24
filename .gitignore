@@ -181,3 +181,6 @@ train-labels-idx1-ubyte
 
 # Logs
 logs/
+
+# Add .DS_Store
+.DS_Store
