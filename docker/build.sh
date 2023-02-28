@@ -39,6 +39,9 @@ fi
 cores_available=$(nproc --all)
 n_build_cores=$(( cores_available -1 ))
 
+# This line is added to hardcode the device type:
+FF_CUDA_ARCH=all # We are running on GP100GL, which is a pascal architecture. Since auto detect does not work
+
 # If FF_CUDA_ARCH is set to autodetect, we need to perform the autodetection here because the Docker
 # image will not have access to GPUs during the build phase (due to a Docker restriction). In all other
 # cases, we pass the value of FF_CUDA_ARCH directly to Cmake.
