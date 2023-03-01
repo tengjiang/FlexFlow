@@ -60,4 +60,4 @@ cd $HOME/FlexFlow
 sudo  ./docker/pull.sh flexflow-cuda
 sudo FF_GPU_BACKEND=cuda ./docker/build.sh flexflow
 sudo FF_GPU_BACKEND=cuda ./docker/run.sh flexflow
-exit
+# exit
