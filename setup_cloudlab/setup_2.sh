@@ -45,8 +45,19 @@ mkdir /etc/docker # make sure this directory is present
 nvidia-ctk runtime configure --runtime=docker
 systemctl restart docker
 
+# Store images and containers on mounted disk
+docker rm -f $(sudo docker ps -aq); sudo docker rmi -f $(sudo docker images -q)
+systemctl stop docker
+rm -rf /var/lib/docker
+mkdir /var/lib/docker
+mkdir /mnt/docker
+mount --rbind /mnt/docker /var/lib/docker
+systemctl start docker
+chmod 666 /var/run/docker.sock
+
 # Pull flexflow CUDA
 cd $HOME/FlexFlow
 sudo  ./docker/pull.sh flexflow-cuda
 sudo FF_GPU_BACKEND=cuda ./docker/build.sh flexflow
 sudo FF_GPU_BACKEND=cuda ./docker/run.sh flexflow
+exit
